@@ -68,14 +68,14 @@ public class AutomaticLeaveApplyImplementation {
             WebElement leaveTillDate = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.leaveTillDate));
             leaveTillDate.click();
             leaveTillDate.sendKeys(Keys.ENTER);
-            // Select Leave Type
-            WebElement leaveType = driver.findElement(Locators.leaveType);
             try {
                 wait.until(ExpectedConditions.invisibilityOf(driver.findElement(Locators.loadingImage)));
-                Thread.sleep(3000);
+                Thread.sleep(6000);
             } catch (Exception e) {
                 Log.info("No loader present");
             }
+            // Select Leave Type
+            WebElement leaveType = driver.findElement(Locators.leaveType);
             Select leaveTypeSelect = new Select(leaveType);
             leaveTypeSelect.selectByIndex(1);
 
@@ -97,7 +97,7 @@ public class AutomaticLeaveApplyImplementation {
     /**
      * Marks availability checkboxes for leave.
      */
-    public static void markAvailibilityCheckBox() {
+    public static void markAvailabilityCheckBox() {
         WebElement availableOnMobile = driver.findElement(Locators.availableOnMobile);
         availableOnMobile.click();
         WebElement availableOnEmail = driver.findElement(Locators.availableOnEmail);

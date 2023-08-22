@@ -60,6 +60,13 @@ public class LoginFunctionImplementation {
     }
 
     /**
+     * Logs the message for an unsuccessful login attempt.
+     */
+    public static void unsuccessfulLoginMessage() {
+        Log.info("Login Unsuccessful");
+    }
+
+    /**
      * Checks if the current URL matches the expected URL.
      *
      * @param expectedUrl The URL expected to match.

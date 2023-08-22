@@ -1,17 +1,19 @@
-@test1
+@AutomatingMIS
 Feature: Leave Apply and Deselect Lunch Automation
 
   Scenario: Implementing login functionality
-    Given  Verify error handling for invalid credentials or SSO failure
-    Then   Verify successful login via credentials
-    Then   Verify website loaded successfully with url "https://mymis.geminisolutions.com/"
+    Given the user attempts to log in with invalid credentials or encounters SSO failure
+    Then an appropriate error message should be displayed
+
+    Given the user successfully logs in using valid credentials
+    Then the website should load successfully with the URL "https://mymis.geminisolutions.com/"
 
   Scenario: Automatic leave apply
-    Given Verify leave date functionality (From-Till)
-    When  Verify reason box
-    And   Verify availability checkbox
-    Then  Verify leave apply
+    Given the user verifies the functionality to select leave dates (From-Till)
+    When the user verifies the presence of the reason input box
+    And the user verifies the functionality of the availability checkbox
+    Then the user should be able to apply for leave automatically
 
   Scenario: Automatic deselect lunch
-    Given Verify entries in Apply For Lunch
-    Then  Verify deletion of matching entries
+    Given the user verifies the entries in the "Apply For Lunch" section
+    Then the user verifies the ability to delete matching entries for lunch application
