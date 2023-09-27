@@ -1,6 +1,5 @@
 package implementations;
 
-import locators.Locators;
 import logger.Log;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -17,16 +16,22 @@ import static implementations.LoginFunctionImplementation.driver;
 public class AutomaticDeselectLunchImplementation {
     static WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(10));
     static LocalDate lunchAppliedDate;
+    public static final By applyBtn = By.xpath("(//span[text()='Apply']/parent::a)[1]");
+
+    public static final By applyForLunch = By.id("applyForlunch");
+    public static final By btnCloseLunch = By.xpath("//button[@id='btnCloseLunch']");
+    public static final By requestSuccessfulButton = By.xpath("//button[text()='OK']");
+    public static final By loadingImage = By.xpath("//img[@class='loading-image-round']");
 
     /**
      * Verifies and selects a lunch date for application.
      */
     public static void verifyAndSelectDateForLunch() {
-        WebElement applyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.applyButton));
+        WebElement applyButton = wait.until(ExpectedConditions.visibilityOfElementLocated(applyBtn));
         applyButton.click();
 
         // Click on lunch apply button
-        WebElement lunchApplyButton = wait.until(ExpectedConditions.elementToBeClickable(Locators.applyForLunch));
+        WebElement lunchApplyButton = wait.until(ExpectedConditions.elementToBeClickable(applyForLunch));
         lunchApplyButton.click();
 
         // Set the applied lunch date to tomorrow
@@ -53,24 +58,24 @@ public class AutomaticDeselectLunchImplementation {
         } catch (Exception e) {
             Assert.fail("Lunch already not applied for the following date");
             // Close the lunch button
-            WebElement buttonCloseLunch = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.buttonCloseLunch));
+            WebElement buttonCloseLunch = wait.until(ExpectedConditions.visibilityOfElementLocated(btnCloseLunch));
             buttonCloseLunch.click();
             driver.close();
         }
         // Confirm deletion
-        WebElement deletedSuccessfullyButton = wait.until(ExpectedConditions.elementToBeClickable(Locators.requestSuccessfulButton));
+        WebElement deletedSuccessfullyButton = wait.until(ExpectedConditions.elementToBeClickable(requestSuccessfulButton));
         deletedSuccessfullyButton.click();
 
         // Wait for loader to become invisible
         try {
-            wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath("//img[@class='loading-image-round']"))));
+            wait.until(ExpectedConditions.invisibilityOf(driver.findElement(loadingImage)));
             Thread.sleep(3000);
         } catch (Exception e) {
             Log.info("Loader not visible");
         }
 
         // Close the lunch button
-        WebElement buttonCloseLunch = wait.until(ExpectedConditions.visibilityOfElementLocated(Locators.buttonCloseLunch));
+        WebElement buttonCloseLunch = wait.until(ExpectedConditions.visibilityOfElementLocated(btnCloseLunch));
         buttonCloseLunch.click();
         driver.close();
     }

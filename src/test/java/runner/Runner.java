@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = {"stepdefinitions"},
         tags = "@AutomatingMIS",
+        plugin = {"pretty", "html:target/cucumber-reports.html"},
         publish = true
 )
 
